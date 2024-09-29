@@ -1,0 +1,11 @@
+{
+  "name": "practice",
+  "version": "1.0.0",
+  "description": "Welcome to the **Code Testing Repository**! This repository is dedicated to experimenting, testing, and showcasing code examples for multiple programming languages. Here, I will be exploring various coding concepts, algorithms, and testing methodologies in **Python**, **Java**, **PHP**, **JavaScript**, and other languages.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cd JavaScript/nxrx-app && npm run dev"
+  },
+  "author": "",
+  "license": "ISC"
+}
