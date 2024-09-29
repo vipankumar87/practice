@@ -32,10 +32,14 @@ return (
                             <Input type='email' id='email' label='Email Address?' value={email} onChange={(ev: any)=>{ setEmail(ev.target.value);}}/>
                             <Input type='password' id='password' label='Password?' value={password} onChange={(ev: any)=>{ setPassword(ev.target.value);}}/>
                         </div>
-                        <button className='bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition'>Login</button>
+                        <button className='bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition'>
+                            {variant == 'login' ? 'Login' : 'Sign Up'}
+                        </button>
                         <p className='text-neutral-500 mt-12'>
-                            First time using Netflix?
-                            <span onClick={toggleVariant} className='text-white ml-1 hover:underline cursor-pointer'>Create new account</span>
+                            {variant == 'login' ? 'First time using Netflix?': 'Already have an account?'}
+                            <span onClick={toggleVariant} className='text-white ml-1 hover:underline cursor-pointer'>
+                                {variant == 'login' ? 'Create new account': 'Login'}
+                            </span>
                         </p>
                     </div>
                 </div>
