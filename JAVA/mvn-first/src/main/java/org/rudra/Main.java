@@ -4,14 +4,15 @@ package org.rudra;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        Car car = new Car("closed", "on", "seated", 12);
+//        car.setSpeed(1).setDoors("closed");
+//        car.setSpeed(500);
+//        car.setEngine("on");
+//        car.setDriver("seated");
+        System.out.println(car.run());
+//        System.out.println(car.getDoors());
+//        System.out.println(car.getSpeed());
+        System.out.println("Hello World");
     }
 }
