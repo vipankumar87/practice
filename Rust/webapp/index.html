@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Wasm</title>
+</head>
+<body>
+    <h1 id="greeting"></h1>
+    <script type="module">
+        import init, { greet } from './pkg/webapp.js';
+
+        async function run() {
+            await init(); // Initialize the wasm module
+            document.getElementById('greeting').innerText = greet(); // Call the Rust function
+        }
+
+        run();
+    </script>
+</body>
+</html>
