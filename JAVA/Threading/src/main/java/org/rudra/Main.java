@@ -41,7 +41,7 @@ public class Main {
              }
          }
      }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Main main = new Main();
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -51,7 +51,7 @@ public class Main {
             }
         });
         thread.setName("Banking");
-        thread.start();
+//        thread.start();
 
         Thread thread2 = new Thread(new Runnable() {
 
@@ -68,7 +68,7 @@ public class Main {
              */
             @Override
             public void run() {
-                if(main.deposit(-1)) {
+                if(main.deposit(4000)) {
                     main.withdraw(1000);
                 } else {
                     thread.interrupt();
@@ -76,6 +76,9 @@ public class Main {
             }
         });
         thread2.setName("Banking");
-        thread2.start();
+//        thread2.start();
+        ConcurrencyControll cc = new ConcurrencyControll();
+        cc.start();
+
     }
 }
