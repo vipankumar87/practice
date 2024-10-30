@@ -2,93 +2,65 @@ package org.rudra;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+// Producer class adds elements to the queue
+class Producer implements Runnable {
+    private ArrayBlockingQueue<Integer> queue;
+
+    public Producer(ArrayBlockingQueue<Integer> queue) {
+        this.queue = queue;
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                // Simulate delay in producing items
+                Thread.sleep(1000);
+                queue.put(Main.counter); // Adds an item to the queue
+                System.out.println("Value added in the queue: " + Main.counter);
+                Main.counter++;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+// Consumer class removes elements from the queue
+class Consumer2 implements Runnable {
+    private ArrayBlockingQueue<Integer> queue;
+
+    public Consumer2(ArrayBlockingQueue<Integer> queue) {
+        this.queue = queue;
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                // Simulate delay in consuming items
+                Thread.sleep(500);
+                int value = queue.take(); // Removes an item from the queue
+                System.out.println("Value removed from the queue: " + value);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
 public class Main {
-    public static int balance = 0;
-    public static int counter = 1;
+    static int counter = 0;
 
-    synchronized public void withdraw(int amount) {
-         if (balance <= 0) {
-             System.out.println("Waiting for amount to be updated after withdrawal of $" + amount);
-             try {
-                 wait();
-             } catch (InterruptedException e) {
-                 System.out.println("Withdrawal interrupted");
-                 return;
-             }
-         }
+    public static void main(String[] args) {
+        ArrayBlockingQueue<Integer> queue = new ArrayBlockingQueue<>(10);
 
-         if ((balance - amount) < 0) {
-             System.out.println("Balance is too low for withdrawal $"+amount);
-             System.out.println("Withdrawal Incomplete");
-             return;
-         }
+        // Creating producer and consumer threads
+        Thread producerThread = new Thread(new Producer(queue));
+        Thread consumerThread = new Thread(new Consumer(queue));
 
-         System.out.println("We are withdrawal of $"+ amount);
-         balance = balance - amount;
-         System.out.println("The balance is now $" + balance);
-     }
-     public boolean deposit(int amount) {
-         synchronized (this) {
-             if(amount > 0) {
-                 System.out.println("we are trying to deposit $" + amount);
-                 balance = balance + amount;
-                 System.out.println("We are now $" + amount);
-                 notify();
-                 return true;
-             } else {
-                 System.out.println("Invalid amount to deposit $" + amount);
-                 return false;
-             }
-         }
-     }
-     public static void main(String[] args){
-         ArrayBlockingQueue<Integer> queue = new ArrayBlockingQueue<>(10);
-         Thread thread1 = new Thread(new BlockingThreading(queue));
-         thread1.start();
-
-         Thread thread2 = new Thread(new Consumer(queue));
-         thread2.start();
-     }
-    public static void mainold(String[] args) throws InterruptedException {
-        Main main = new Main();
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                main.withdraw(10);
-                main.withdraw(100);
-            }
-        });
-        thread.setName("Banking");
-//        thread.start();
-
-        Thread thread2 = new Thread(new Runnable() {
-
-            /**
-             * When an object implementing interface {@code Runnable} is used
-             * to create a thread, starting the thread causes the object's
-             * {@code run} method to be called in that separately executing
-             * thread.
-             * <p>
-             * The general contract of the method {@code run} is that it may
-             * take any action whatsoever.
-             *
-             * @see Thread#run()
-             */
-            @Override
-            public void run() {
-                if(main.deposit(4000)) {
-                    main.withdraw(1000);
-                } else {
-                    thread.interrupt();
-                }
-            }
-        });
-        thread2.setName("Banking");
-//        thread2.start();
-        ConcurrencyControll cc = new ConcurrencyControll();
-        cc.start();
-
+        // Start both threads
+        producerThread.start();
+        consumerThread.start();
     }
 }
