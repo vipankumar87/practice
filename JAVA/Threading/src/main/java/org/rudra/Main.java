@@ -62,6 +62,7 @@ public class Main {
 //        // Start both threads
 //        producerThread.start();
 //        consumerThread.start();
-        Reentrant.main(args);
+//        Reentrant.main(args);
+        deadlock.main(args);
     }
 }
