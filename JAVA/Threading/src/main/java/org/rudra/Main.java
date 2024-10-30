@@ -52,15 +52,16 @@ class Consumer2 implements Runnable {
 public class Main {
     static int counter = 0;
 
-    public static void main(String[] args) {
-        ArrayBlockingQueue<Integer> queue = new ArrayBlockingQueue<>(10);
-
-        // Creating producer and consumer threads
-        Thread producerThread = new Thread(new Producer(queue));
-        Thread consumerThread = new Thread(new Consumer(queue));
-
-        // Start both threads
-        producerThread.start();
-        consumerThread.start();
+    public static void main(String[] args) throws InterruptedException {
+//        ArrayBlockingQueue<Integer> queue = new ArrayBlockingQueue<>(10);
+//
+//        // Creating producer and consumer threads
+//        Thread producerThread = new Thread(new Producer(queue));
+//        Thread consumerThread = new Thread(new Consumer(queue));
+//
+//        // Start both threads
+//        producerThread.start();
+//        consumerThread.start();
+        Reentrant.main(args);
     }
 }
