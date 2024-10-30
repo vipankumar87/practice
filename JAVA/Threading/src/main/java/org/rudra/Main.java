@@ -1,5 +1,8 @@
 package org.rudra;
 
+import org.rudra.lamda.CompLam;
+import org.rudra.lamda.Lm1;
+
 import java.util.concurrent.ArrayBlockingQueue;
 
 // Producer class adds elements to the queue
@@ -63,6 +66,9 @@ public class Main {
 //        producerThread.start();
 //        consumerThread.start();
 //        Reentrant.main(args);
-        deadlock.main(args);
+//        deadlock.main(args);
+//        deadlockResolved.main(args);
+//        Lm1.start();
+        CompLam.main(args);
     }
 }
