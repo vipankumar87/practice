@@ -1,12 +1,14 @@
 package org.rudra;
 
-import java.net.SocketTimeoutException;
+import java.util.concurrent.ArrayBlockingQueue;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static int balance = 0;
-     synchronized public void withdraw(int amount) {
+    public static int counter = 1;
+
+    synchronized public void withdraw(int amount) {
          if (balance <= 0) {
              System.out.println("Waiting for amount to be updated after withdrawal of $" + amount);
              try {
@@ -41,7 +43,15 @@ public class Main {
              }
          }
      }
-    public static void main(String[] args) throws InterruptedException {
+     public static void main(String[] args){
+         ArrayBlockingQueue<Integer> queue = new ArrayBlockingQueue<>(10);
+         Thread thread1 = new Thread(new BlockingThreading(queue));
+         thread1.start();
+
+         Thread thread2 = new Thread(new Consumer(queue));
+         thread2.start();
+     }
+    public static void mainold(String[] args) throws InterruptedException {
         Main main = new Main();
         Thread thread = new Thread(new Runnable() {
             @Override
