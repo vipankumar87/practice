@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.IntPredicate;
+import java.util.function.Predicate;
 
 class Data{
     private String name;
@@ -44,5 +46,18 @@ public class CompLam {
         for (Data data : list) {
             System.out.println(data);
         }
+
+        IntPredicate less = value -> value < 18;
+        IntPredicate more = value -> value > 18;
+
+        // Combine predicates to check if the value is neither less than nor more than 18
+        IntPredicate between = less.or(more).negate();
+
+        // Test the predicate with 18
+        System.out.println("predicate: " + between.test(18)); // Output: false
+        System.out.println("predicate: " + between.test(20)); // Output: false
+        System.out.println("predicate: " + between.test(16)); // Output: false
+        System.out.println("predicate: " + between.test(19)); // Output: false
+        System.out.println("predicate: " + between.test(18)); // Output: true
     }
 }

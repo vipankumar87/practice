@@ -2,7 +2,9 @@ package org.rudra;
 
 import org.rudra.lamda.CompLam;
 import org.rudra.lamda.Lm1;
+import org.rudra.filemanager.*;
 
+import java.io.IOException;
 import java.util.concurrent.ArrayBlockingQueue;
 
 // Producer class adds elements to the queue
@@ -55,7 +57,7 @@ class Consumer2 implements Runnable {
 public class Main {
     static int counter = 0;
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
 //        ArrayBlockingQueue<Integer> queue = new ArrayBlockingQueue<>(10);
 //
 //        // Creating producer and consumer threads
@@ -69,6 +71,7 @@ public class Main {
 //        deadlock.main(args);
 //        deadlockResolved.main(args);
 //        Lm1.start();
-        CompLam.main(args);
+//        CompLam.main(args);
+        firstf.main(args);
     }
 }
